@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Создание заявки</title>
+    <title>Редактирование заявки</title>
     
     {{-- Tailwind CSS --}}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,14 +33,16 @@
             </a>
         </div>
 
-        {{-- Форма создания заявки --}}
+        {{-- Форма редактирования заявки --}}
         <div class="max-w-2xl mx-auto">
             <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-6">Создание новой заявки</h2>
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">Редактирование заявки #{{ $report->id }}</h2>
                 
                 {{-- @csrf директива для защиты от CSRF-атак --}}
-                <form method="POST" action="{{ route('reports.store') }}" class="space-y-6">
+                {{-- @method('PUT') указывает, что это PUT запрос для обновления --}}
+                <form method="POST" action="{{ route('reports.update', $report->id) }}" class="space-y-6">
                     @csrf
+                    @method('PUT')
                     
                     {{-- Поле для номера автомобиля --}}
                     <div>
@@ -50,7 +52,7 @@
                         <input type="text" 
                                id="number" 
                                name="number" 
-                               value="{{ old('number') }}"
+                               value="{{ old('number', $report->number) }}"
                                placeholder="Например: А123ВС777" 
                                class="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition @error('number') border-red-500 @enderror">
                         @error('number')
@@ -67,18 +69,18 @@
                                   name="description" 
                                   rows="5" 
                                   placeholder="Опишите проблему или заявку подробнее..." 
-                                  class="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none resize-none transition @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
+                                  class="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none resize-none transition @error('description') border-red-500 @enderror">{{ old('description', $report->description) }}</textarea>
                         @error('description')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- Кнопка отправки формы --}}
+                    {{-- Кнопки отправки формы --}}
                     <div class="flex items-center gap-3 pt-4">
                         <button type="submit" 
                                 class="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-6 py-2.5 rounded-md text-sm font-medium flex items-center gap-2 transition-colors shadow-sm">
                             <i class="bi bi-check-lg text-lg"></i>
-                            Создать заявку
+                            Сохранить изменения
                         </button>
                         <a href="{{ route('reports.index') }}" 
                            class="text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors">
@@ -86,11 +88,6 @@
                         </a>
                     </div>
                 </form>
-            </div>
-
-            {{-- Подсказка о CSRF --}}
-            <div class="mt-4 text-xs text-gray-400 text-center">
-                * Все поля обязательны для заполнения
             </div>
         </div>
     </div>
