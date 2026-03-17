@@ -8,9 +8,6 @@ use App\Models\Report;
 
 class ReportSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Report::factory()->count(10)->create();

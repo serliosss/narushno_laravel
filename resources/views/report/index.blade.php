@@ -5,50 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список заявок</title>
     
-    {{-- Tailwind CSS --}}
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-{{-- Шапка сайта --}}
+
 <header class="bg-white shadow-sm border-b border-gray-200 p-2">
     <div class="max-w-7xl mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
-            {{-- Логотип и название --}}
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-150">
                 <div>
-                    <h1 class="text-3xl font-bold text-blue-700">НАРУШЕНИЙ<span class="text-red-600">.НЕТ</span></h1>
+                    <a href="{{ route('reports.index') }}" class="text-3xl font-bold text-blue-700">НАРУШЕНИЙ<span class="text-red-600">.НЕТ</span></a>
                 </div>
+            </div>
+            <div>
+                <a href="{{ route('reports.create') }}">
+                    <button class="bg-[#dc2626] hover:bg-white hover:text-[#dc2626] text-white px-6 py-2.5 rounded-md text-sm font-medium flex items-center gap-2 transition-colors shadow-sm">
+                        <i class="bi bi-plus-lg text-lg"></i>
+                                    создать заявление
+                    </button>
+                </a>
             </div>
         </div>
     </div>
 </header>
 <body class="bg-[#e6f3ff] font-sans min-h-screen">
     <div class="max-w-7xl mx-auto px-4 py-6">
-        {{-- Красная кнопка слева сверху --}}
-        <div class="mb-6">
-            <button class="bg-[#dc2626] hover:bg-white hover:text-[#dc2626] text-white px-6 py-2.5 rounded-md text-sm font-medium flex items-center gap-2 transition-colors shadow-sm">
-                <a href="{{ route('reports.create') }}">
-                    <i class="bi bi-plus-lg text-lg"></i>
-                        создать заявление
-                </a>
-            </button>
+        <div class="mb-6 flex gap-10 text-center">
+            <div class="flex-column bg-blue-100 p-4 border">
+                <span class="">Сортировать по дате создания:</span>
+                <div class="flex gap-4">
+                    <a href="{{ route('reports.index', [ 'sort' => 'desc', 'status' => $status ]) }}" class="hover:text-blue-500 transition-colors">Сначала новые</a>
+                    <a href="{{ route('reports.index', [ 'sort' => 'asc', 'status' => $status ]) }}" class="hover:text-blue-500 transition-colors">Сначала старые</a>
+                </div>
+            </div>
+
+            <div class="flex-column bg-blue-100 p-4 border">
+                <span class="">Сортировать по статусу заявки:</span>
+                <ul class="flex gap-4">
+                    @foreach ($statuses as $status)
+                        <li>
+                            <a href="{{ route('reports.index', [ 'sort' => $sort, 'status' => $status->id]) }}" class="hover:text-blue-500 transition-colors">{{ $status->name }}</a>   
+                        </li> 
+                    @endforeach
+                </ul>
+            </div>
         </div>
 
-        {{-- Вывод сообщения об успехе --}}
-        @if(session('success'))
+        <!-- @if(session('success'))
             <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif -->
 
         @if($reports->count() > 0)
-            {{-- Сетка в 3 столбца --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($reports as $report)
-                    {{-- Белая карточка --}}
                     <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 flex flex-col h-full">
-                        {{-- Верхняя часть с датой и иконками --}}
                         <div class="flex justify-between items-start mb-3">
                             <div class="flex gap-2">
                                 <a href="{{ route('reports.edit', $report) }}">
@@ -56,46 +68,38 @@
                                         <i class="bi bi-pencil text-base"></i>
                                     </button>   
                                 </a>
-                                <button class="text-gray-400 hover:text-red-600 transition-colors">
-                                    <i class="bi bi-trash3 text-base"></i>
-                                </button>
+                                <form action=" {{route('reports.destroy', $report->id)}} " method="POST" class="w-100 h-100">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="text-gray-400 hover:text-red-600 transition-colors">
+                                        <i class="bi bi-trash3 text-base"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 text-sm">{{ $report->created_at }}</p>
                             </div>
                         </div>
 
-                        {{-- Номер автомобиля --}}
                         <div class="font-bold text-gray-800 text-lg mb-2">
                             {{ $report->number }}
                         </div>
 
-                        {{-- Описание --}}
                         <div class="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">
                             {{ $report->description }}
                         </div>
 
-                        {{-- Статус --}}
                         <div class="text-sm mt-auto pt-2 border-t border-gray-50">
-                            @php
-                                $statusText = match($report->status_id) {
-                                    1 => 'новое',
-                                    2 => 'отклонено',
-                                    3 => 'подтверждено',
-                                    default => 'неизвестно'
-                                };
-                                $statusColor = match($report->status_id) {
-                                    1 => 'text-gray-600',
-                                    2 => 'text-red-600',
-                                    3 => 'text-green-600',
-                                    default => 'text-gray-600'
-                                };
-                            @endphp
                             <span class="font-medium text-gray-700">Статус заявления - </span>
-                            <span class="{{ $statusColor }}">{{ $statusText }}</span>
+                            <span>{{ $report->status->name }}</span>
                         </div>
                     </div>
                 @endforeach
             </div>
+            <div class="pt-3">
+                {{ $reports->appends(request()->query())->links() }}
+            </div>
 
-            {{-- Счетчик заявок --}}
             <div class="text-right mt-4 text-gray-500 text-sm">
                 Всего заявок: {{ $reports->count() }}
             </div>
