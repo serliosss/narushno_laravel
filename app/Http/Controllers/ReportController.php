@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -20,9 +21,9 @@ class ReportController extends Controller
             'status' => "exists:statuses,id"
         ]);
         if($validate){
-            $reports = Report::where('status_id', $status)->orderBy('created_at', $sort)->paginate(9);
+            $reports = Report::where('status_id', $status)->where('user_id', Auth::user()->id)->orderBy('created_at', $sort)->paginate(9);
         }else {
-            $reports = Report::orderBy('created_at', $sort)->paginate(9);
+            $reports = Report::where('user_id', Auth::user()->id)->orderBy('created_at', $sort)->paginate(9);
         }
 
         $statuses = Status::all();
@@ -37,15 +38,21 @@ class ReportController extends Controller
             'description' => 'string',
         ]);
 
+        $data['user_id'] = Auth::user()->id;
         $data['status_id'] = 1;
 
-        $report->create($data);
+        $report -> created($data);
 
         return redirect()->route('reports.index')->with('success', 'Заявка успешно создана!');
     }
 
     public function edit(Report $report) {
-        return view('report.edit', compact('report'));
+        if(Auth::user()->id === $report->user_id) {
+            return view('reports.edit', compact('report'));
+        }
+        else {
+            abort(403, 'У вас нет прав на редактроване этой записи.');
+        }
     }
     public function update(Request $request, Report $report) {
         $data = $request -> validate([
