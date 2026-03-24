@@ -41,14 +41,14 @@ class ReportController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['status_id'] = 1;
 
-        $report -> created($data);
+        $report -> create($data);
 
         return redirect()->route('reports.index')->with('success', 'Заявка успешно создана!');
     }
 
     public function edit(Report $report) {
         if(Auth::user()->id === $report->user_id) {
-            return view('reports.edit', compact('report'));
+            return view('report.edit', compact('report'));
         }
         else {
             abort(403, 'У вас нет прав на редактроване этой записи.');
