@@ -55,18 +55,34 @@ class ReportController extends Controller
         }
     }
     public function update(Request $request, Report $report) {
-        $data = $request -> validate([
-            'number' => 'string',
-            'description' => 'string',
-        ]);
+        if(Auth::user()->id === $report->user_id) {
+            $data = $request -> validate([
+                'number' => 'string',
+                'description' => 'string',
+            ]);
 
-        $report->update($data);
+            $report->update($data);
 
-        return redirect()->route('reports.index')->with('success', 'Заявка успешно обновлена!');
+            return redirect()->route('reports.index')->with('success', 'Заявка успешно обновлена!');
+        }else {
+            abort(403, 'У вас нет прав на редактроване этой записи.');
+        }
     }
 
     public function destroy(Report $report) {
-        $report -> delete();
-        return redirect()->back();
+        if(Auth::user()->id === $report->user_id) {
+            $report -> delete();
+            return redirect()->back();
+        }else {
+            abort(403, 'У вас нет прав на редактроване этой записи.');
+        }
+    }
+
+    public function statusUpdate(Request $request, Report $report) {
+        $request -> validate([
+            'status_id' => 'required|exists:statuses,id',
+        ]);
+        $report->update($request->only(['status_id']));
+        return redirect() -> back();
     }
 }
