@@ -37,3 +37,10 @@ Route::middleware('auth')->group(function() {
         Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
         Route::patch('/reports/status/{report}/', [ReportController::class, 'statusUpdate'])->name('reports.status.update');
     });
+
+    Route::get('/index', function () {
+        return view('index');
+    });
+    Route::get('/second', function () {
+        return view('second');
+    });
