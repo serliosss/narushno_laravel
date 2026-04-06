@@ -30,32 +30,7 @@
 </header>
 <body class="bg-[#e6f3ff] font-sans min-h-screen">
     <div class="max-w-7xl mx-auto px-4 py-6">
-        <div class="mb-6 flex gap-10 text-center">
-            <div class="flex-column bg-blue-100 p-4 border">
-                <span class="">Сортировать по дате создания:</span>
-                <div class="flex gap-4">
-                    <a href="{{ route('reports.index', [ 'sort' => 'desc', 'status' => $status ]) }}" class="hover:text-blue-500 transition-colors">Сначала новые</a>
-                    <a href="{{ route('reports.index', [ 'sort' => 'asc', 'status' => $status ]) }}" class="hover:text-blue-500 transition-colors">Сначала старые</a>
-                </div>
-            </div>
-
-            <div class="flex-column bg-blue-100 p-4 border">
-                <span class="">Сортировать по статусу заявки:</span>
-                <ul class="flex gap-4">
-                    @foreach ($statuses as $status)
-                        <li>
-                            <a href="{{ route('reports.index', [ 'sort' => $sort, 'status' => $status->id]) }}" class="hover:text-blue-500 transition-colors">{{ $status->name }}</a>   
-                        </li> 
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-
-        <!-- @if(session('success'))
-            <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
-                {{ session('success') }}
-            </div>
-        @endif -->
+        <x-filter :sort=$sort :status=$status></x-filter>
 
         @if($reports->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -90,8 +65,9 @@
                         </div>
 
                         <div class="text-sm mt-auto pt-2 border-t border-gray-50">
-                            <span class="font-medium text-gray-700">Статус заявления - </span>
-                            <span>{{ $report->status->name }}</span>
+                            <x-status :type="$report->status->id">
+                                {{$report->status->name}}
+                            </x-status>
                         </div>
                     </div>
                 @endforeach
