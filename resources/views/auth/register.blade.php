@@ -40,7 +40,7 @@
 
          <!-- Tel -->
          <div class="mt-4">
-            <x-tet-input id="tel" class="block mt-1 w-full placeholder:text-gray-400" name="tel" :value="old('tel')" required autocomplete="tel" placeholder="Телефон"/>
+            <x-tel-input id="tel" class="block mt-1 w-full placeholder:text-gray-400" name="tel" :value="old('tel')" required autocomplete="tel" placeholder="Телефон"/>
             <x-input-error :messages="$errors->get('tel')" class="mt-2" />
          </div>
 
