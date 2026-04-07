@@ -19,6 +19,24 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
+        "@alpinejs/mask": "^3.15.11",
         "flowbite": "^4.0.1"
-    }
+    },
+    "name": "narushno_laravel",
+    "version": "1.0.0",
+    "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
+    "main": "postcss.config.js",
+    "directories": {
+        "test": "tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/serliosss/narushno_laravel.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/serliosss/narushno_laravel/issues"
+    },
+    "homepage": "https://github.com/serliosss/narushno_laravel#readme"
 }

@@ -13,13 +13,13 @@
 
         <!-- Email Address -->
         <div>
-            <x-text-input id="login" class="block mt-1 w-full text-gray-400" type="text" name="login" :value="old('login')" required autofocus autocomplete="login" placeholder="Логин"/>
+            <x-text-input id="login" class="block mt-1 w-full placeholder:text-gray-400" type="text" name="login" :value="old('login')" required autofocus autocomplete="login" placeholder="Логин"/>
             <x-input-error :messages="$errors->get('login')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-text-input id="password" class="block mt-1 w-full text-gray-400"
+            <x-text-input id="password" class="block mt-1 w-full placeholder:text-gray-400"
                             type="password"
                             name="password"
                             required autocomplete="current-password" 

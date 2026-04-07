@@ -14,7 +14,7 @@
         <div class="flex items-center justify-between gap-3">
             <div class="flex items-center flex-1">
                 <div>
-                    <a href="{{ route('reports.index') }}" class="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700 whitespace-nowrap">НАРУШЕНИЙ<span class="text-red-600">.НЕТ</span></a>
+                    <a href="{{ route('dashboard') }}" class="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700 whitespace-nowrap">НАРУШЕНИЙ<span class="text-red-600">.НЕТ</span></a>
                 </div>
             </div>
             <div>
@@ -31,6 +31,7 @@
 </header>
 <body class="bg-[#e6f3ff] font-sans min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+        @include('layouts.flash-messages')
         <x-filter :sort=$sort :status=$status></x-filter>
 
         @if($reports->count() > 0)
@@ -53,7 +54,7 @@
                                 </form>
                             </div>
                             <div>
-                                <p class="text-gray-600 text-xs sm:text-sm">{{ $report->created_at }}</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">{{\Carbon\Carbon::parse($report->created_at)->translatedFormat('j F Y h:i');}}</p>
                             </div>
                         </div>
 

@@ -61,3 +61,4 @@ class User extends Authenticatable
         return $this->role === self::ADMIN_ROLE;
     }
 }
+

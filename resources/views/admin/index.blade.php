@@ -15,7 +15,7 @@
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-150">
                 <div>
-                    <a href="{{ route('admin.index') }}" class="text-3xl font-bold text-blue-700">НАРУШЕНИЙ<span class="text-red-600">.НЕТ</span></a>
+                    <a href="{{ route('dashboard') }}" class="text-3xl font-bold text-blue-700">НАРУШЕНИЙ<span class="text-red-600">.НЕТ</span></a>
                 </div>
             </div>
             <div>

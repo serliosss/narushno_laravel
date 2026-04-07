@@ -10,43 +10,43 @@
 
         <!-- Name -->
         <div>
-            <x-text-input id="name" class="block mt-1 w-full text-gray-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Имя"/>
+            <x-text-input id="name" class="block mt-1 w-full placeholder:text-gray-400" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Имя"/>
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Middlename -->
          <div class="mt-4">
-            <x-text-input id="middlename" class="block mt-1 w-full text-gray-400" type="text" name="middlename" :value="old('middlename')" required autocomplete="middlename" placeholder="Фамилия"/>
+            <x-text-input id="middlename" class="block mt-1 w-full placeholder:text-gray-400" type="text" name="middlename" :value="old('middlename')" required autocomplete="middlename" placeholder="Фамилия"/>
             <x-input-error :messages="$errors->get('middlename')" class="mt-2" />
          </div>
 
          <!-- Lastname -->
          <div class="mt-4">
-            <x-text-input id="lastname" class="block mt-1 w-full text-gray-400" type="text" name="lastname" :value="old('lastname')" required autocomplete="lastname" placeholder="Отчество"/>
+            <x-text-input id="lastname" class="block mt-1 w-full placeholder:text-gray-400" type="text" name="lastname" :value="old('lastname')" required autocomplete="lastname" placeholder="Отчество"/>
             <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
          </div>
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-text-input id="email" class="block mt-1 w-full text-gray-400" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Почта"/>
+            <x-text-input id="email" class="block mt-1 w-full placeholder:text-gray-400" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Почта"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Login -->
          <div class="mt-4">
-            <x-text-input id="login" class="block mt-1 w-full text-gray-400" type="text" name="login" :value="old('login')" required autocomplete="login" placeholder="Логин"/>
+            <x-text-input id="login" class="block mt-1 w-full placeholder:text-gray-400" type="text" name="login" :value="old('login')" required autocomplete="login" placeholder="Логин"/>
             <x-input-error :messages="$errors->get('login')" class="mt-2" />
          </div>
 
          <!-- Tel -->
          <div class="mt-4">
-            <x-text-input id="tel" class="block mt-1 w-full text-gray-400" type="text" name="tel" :value="old('tel')" required autocomplete="tel" placeholder="Телефон"/>
+            <x-tet-input id="tel" class="block mt-1 w-full placeholder:text-gray-400" name="tel" :value="old('tel')" required autocomplete="tel" placeholder="Телефон"/>
             <x-input-error :messages="$errors->get('tel')" class="mt-2" />
          </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-text-input id="password" class="block mt-1 w-full text-gray-400"
+            <x-text-input id="password" class="block mt-1 w-full placeholder:text-gray-400"
                             type="password"
                             name="password"
                             required autocomplete="new-password" 
@@ -57,7 +57,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-text-input id="password_confirmation" class="block mt-1 w-full text-gray-400"
+            <x-text-input id="password_confirmation" class="block mt-1 w-full placeholder:text-gray-400"
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" 
                             placeholder="Повторите пароль"/>
