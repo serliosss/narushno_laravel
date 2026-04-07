@@ -24,9 +24,13 @@
                         {{ __('Создать заявку') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                        {{ __('Админ-панель') }}
-                    </x-nav-link>
+                    @auth
+                        @if(Auth::user()->role === 'admin')
+                            <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                                {{ __('Админ-панель') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 

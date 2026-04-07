@@ -44,10 +44,13 @@
 
         <!-- Ссылка "Забыли пароль?" -->
         @if (Route::has('password.request'))
-            <div class="mt-4 text-center">
+            <div class="mt-4 text-center flex justify-between">
                 <a class="text-sm text-gray-600 hover:text-blue-600 hover:underline transition duration-200" href="{{ route('password.request') }}">
                     {{ __('Забыли свой пароль?') }}
                 </a>
+                <a class="text-sm text-gray-600 hover:text-blue-600 hover:underline transition duration-200" href="{{ route('register') }}">
+                    {{ __('Нет аккаунта?') }}
+                </a>                
             </div>
         @endif
         </div>
