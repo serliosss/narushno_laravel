@@ -50,6 +50,9 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Статус
                                 </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Изображение
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -82,6 +85,11 @@
                                                 @endforeach
                                             </select>
                                         </form>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        @isset($report->path_img)
+                                            <img src="{{ Storage::url($report->path_img) }}" class="contact-block__img w-100 h-100" alt="">
+                                        @endisset
                                     </td>
                                 </tr>
                             @endforeach

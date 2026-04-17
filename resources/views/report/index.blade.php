@@ -71,6 +71,10 @@
                                 {{$report->status->name}}
                             </x-status>
                         </div>
+
+                        @isset($report->path_img)
+                            <img src="{{ Storage::url($report->path_img) }}" class="contact-block__img" alt="">
+                        @endisset
                     </div>
                 @endforeach
             </div>

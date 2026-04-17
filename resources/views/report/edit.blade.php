@@ -41,11 +41,11 @@
                             Номер автомобиля <span class="text-red-500">*</span>
                         </label>
                         <input type="text" 
-                               id="number" 
-                               name="number" 
-                               value="{{ old('number', $report->number) }}"
-                               placeholder="Например: А123ВС777" 
-                               class="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition @error('number') border-red-500 @enderror">
+                                id="number" 
+                                name="number" 
+                                value="{{ old('number', $report->number) }}"
+                                placeholder="Например: А123ВС777" 
+                                class="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition @error('number') border-red-500 @enderror">
                         @error('number')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -56,13 +56,28 @@
                             Описание заявки <span class="text-red-500">*</span>
                         </label>
                         <textarea id="description" 
-                                  name="description" 
-                                  rows="5" 
-                                  placeholder="Опишите проблему или заявку подробнее..." 
-                                  class="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none resize-none transition @error('description') border-red-500 @enderror">{{ old('description', $report->description) }}</textarea>
+                                    name="description" 
+                                    rows="5" 
+                                    placeholder="Опишите проблему или заявку подробнее..." 
+                                    class="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none resize-none transition @error('description') border-red-500 @enderror">{{ old('description', $report->description) }}</textarea>
                         @error('description')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
+                    </div>
+
+                    <div>
+                        <x-input-label for="path_img" :value="__('Фото автомобиля')" class="text-sm font-medium text-gray-700" />
+                            
+                        <div class="relative">
+                            <x-text-input 
+                                id="path_img" 
+                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer border border-gray-300 rounded-md focus:ring-1 focus:ring-red-500 focus:border-red-500" 
+                                type="file" 
+                                name="path_img" 
+                                required />
+                        </div>
+                            
+                        <x-input-error :messages="$errors->get('path_img')" class="mt-1 text-xs sm:text-sm" />
                     </div>
 
                     <div class="flex items-center gap-3 pt-4">
@@ -72,7 +87,7 @@
                             Сохранить изменения
                         </button>
                         <a href="{{ route('reports.index') }}" 
-                           class="text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors">
+                            class="text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors">
                             Отмена
                         </a>
                     </div>
