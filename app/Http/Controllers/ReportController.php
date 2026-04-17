@@ -84,10 +84,10 @@ class ReportController extends Controller
 
     public function destroy(Report $report) {
         if(Auth::user()->id === $report->user_id) {
-            $report -> delete();
-            return redirect()->back();
+            $report->delete();
+            return redirect()->back()->with('success', 'Заявка успешно удалена!');
         }else {
-            abort(403, 'У вас нет прав на редактроване этой записи.');
+            abort(403, 'У вас нет прав на редактирование этой записи.');
         }
     }
 
@@ -95,7 +95,10 @@ class ReportController extends Controller
         $request -> validate([
             'status_id' => 'required|exists:statuses,id',
         ]);
+        $oldStatus = $report->status->name;
+        $newStatus = Status::find($request->status_id)->name;
+        
         $report->update($request->only(['status_id']));
-        return redirect() -> back();
+        return redirect()->back()->with('success', 'Статус заявки #' . $report->id . ' изменен с "' . $oldStatus . '" на "' . $newStatus . '"!');
     }
 }

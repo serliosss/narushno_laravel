@@ -27,6 +27,7 @@
 
 <body class="bg-[#e6f3ff] font-sans min-h-screen">
     <div class="max-w-7xl mx-auto px-4 py-6">
+        @include('layouts.flash-messages')
         <div class="mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Административная панель</h1>
             <p class="text-gray-600 mt-1">Управление заявками пользователей</p>

@@ -65,21 +65,6 @@
                         @enderror
                     </div>
 
-                    <div>
-                        <x-input-label for="path_img" :value="__('Фото автомобиля')" class="text-sm font-medium text-gray-700" />
-                            
-                        <div class="relative">
-                            <x-text-input 
-                                id="path_img" 
-                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer border border-gray-300 rounded-md focus:ring-1 focus:ring-red-500 focus:border-red-500" 
-                                type="file" 
-                                name="path_img" 
-                                required />
-                        </div>
-                            
-                        <x-input-error :messages="$errors->get('path_img')" class="mt-1 text-xs sm:text-sm" />
-                    </div>
-
                     <div class="flex items-center gap-3 pt-4">
                         <button type="submit" 
                                 class="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-6 py-2.5 rounded-md text-sm font-medium flex items-center gap-2 transition-colors shadow-sm">
